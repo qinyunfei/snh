@@ -1,0 +1,28 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 默认使用h2（内存数据库） -->
+	<!-- 切换成MySQL -->
+  <bean id="processEngineConfiguration" class="org.activiti.engine.impl.cfg.StandaloneProcessEngineConfiguration">
+
+    <property name="jdbcUrl" value="jdbc:mysql://10.211.55.19:3306/act" />
+    <property name="jdbcDriver" value="com.mysql.jdbc.Driver" />
+    <property name="jdbcUsername" value="root" />
+    <property name="jdbcPassword" value="123456" />
+
+	<!--数据库更新：第一次流程框架运行会创建表，以后再运行就不创建了， 新版更替是表的更新 -->
+    <property name="databaseSchemaUpdate" value="true" />
+
+    <property name="jobExecutorActivate" value="false" />
+    <property name="asyncExecutorEnabled" value="true" />
+    <property name="asyncExecutorActivate" value="false" />
+    
+    <!-- 解决乱码 -->
+    <property name="activityFontName" value="宋体"></property>
+    <property name="annotationFontName" value="宋体"></property>
+    <property name="labelFontName" value="宋体"></property>
+
+  </bean>
+
+</beans>

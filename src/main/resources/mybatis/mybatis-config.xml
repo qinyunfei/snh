@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 使用环境development -->
+	<environments default="development">
+		<!-- 环境development配置 -->
+		<environment id="development">
+			<!-- 使用JDBC的事务 -->
+			<transactionManager type="JDBC" />
+			<!-- dataSource是配置jdbc数据源。pooled表示使用数据库连接池 -->
+			<dataSource type="POOLED">
+				<!-- 是jdbc连接的四个核心的属性 -->
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<property name="url" value="jdbc:mysql://10.211.55.19:3306/test" />
+				<property name="username" value="root" />
+				<property name="password" value="123456" />
+			</dataSource>
+		</environment>
+	</environments>
+
+
+	<mappers>
+		<mapper class="mybatis.EmpMapper" />
+	</mappers>
+</configuration>
