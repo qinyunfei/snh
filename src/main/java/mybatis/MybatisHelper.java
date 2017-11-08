@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Config;
 import tk.mybatis.mapper.mapperhelper.MapperHelper;
 //通用mapper3配置
 public class MybatisHelper {
@@ -23,12 +24,12 @@ public class MybatisHelper {
 				SqlSession session = sqlSessionFactory.openSession();
 				
 				MapperHelper mapperHelper = new MapperHelper();
-//				// 特殊配置
-//				Config config = new Config();
-//				// 具体支持的参数看后面的文档
-//				//config.setXXX(XXX);
-//				// 设置配置
-//				mapperHelper.setConfig(config);
+				// 特殊配置
+				Config config = new Config();
+				// 具体支持的参数看后面的文档
+				config.setIDENTITY("MySQL");
+				// 设置配置
+				mapperHelper.setConfig(config);
 				
 				
 				// 注册自己项目中使用的通用Mapper接口，这里没有默认值，必须手动注册

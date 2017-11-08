@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Emp implements Serializable {
     @Id
     @Column(name = "EMPNO")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer empno;
 
     @Column(name = "ENAME")
