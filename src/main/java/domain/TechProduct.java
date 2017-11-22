@@ -8,18 +8,18 @@ public class TechProduct {
 	public TechProduct() {
 		super();
 	}
-	public TechProduct(String id, String name, String cone) {
+	public TechProduct(String id, String name, String coen) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.cone = cone;
+		this.coen = coen;
 	}
 	@Field
 	public String id;
 	@Field
 	public String name;
-	@Field
-	public String cone;
+	@Field("coen") //如果字段的名字和字段域里不同可以这样指定字段域的名字
+	public String coen;
 	
 	public String getId() {
 		return id;
@@ -30,18 +30,18 @@ public class TechProduct {
 	public String getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(String coen) {
 		this.name = name;
 	}
-	public String getCone() {
-		return cone;
+	public String getCoen() {
+		return coen;
 	}
-	public void setCone(String cone) {
-		this.cone = cone;
+	public void setCoen(String coen) {
+		this.coen = coen;
 	}
 	@Override
 	public String toString() {
-		return "TechProduct [id=" + id + ", name=" + name + ", cone=" + cone + "]";
+		return "TechProduct [id=" + id + ", name=" + name + ", cone=" + coen + "]";
 	}
 	
 	
