@@ -98,4 +98,6 @@ private Document getDocument(File f)throws Exception {
       long end=System.currentTimeMillis();
       System.out.println("索引："+numIndexed+" 个文件 花费了"+(end-start)+" 毫秒");
    }
+   
+
 }

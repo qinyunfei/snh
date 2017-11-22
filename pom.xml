@@ -111,6 +111,12 @@
 		</dependency>
 
 
+		<!--solrj -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+			<version>7.1.0</version>
+		</dependency>
 
 
 
