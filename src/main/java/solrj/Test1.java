@@ -1,6 +1,7 @@
 package solrj;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,8 +186,26 @@ public class Test1 {
 
 	}
 
+	//删除文档
 	@Test
-	public void name5() {
-
+	public void name5() throws SolrServerException, IOException {
+		//1.删除一个
+		httpSolrClient.deleteById("1");
+		
+		
+		 //2.删除多个
+        List<String> ids = new ArrayList<>();
+        ids.add("1");
+        ids.add("2");
+        httpSolrClient.deleteById(ids);
+        
+        
+        
+        //3.根据查询条件删除数据,这里的条件只能有一个，不能以逗号相隔
+        httpSolrClient.deleteByQuery("id:zxj1");
+        
+        //4.删除全部，删除不可恢复
+        httpSolrClient.deleteByQuery("*:*");
+		httpSolrClient.commit();
 	}
 }
