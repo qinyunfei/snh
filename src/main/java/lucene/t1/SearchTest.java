@@ -180,7 +180,7 @@ public class SearchTest {
 
    /**
     * 相近词语的搜索—FuzzyQuery
-    * FuzzyQuery是一种模糊查询，它可以简单地识别两个相近的词语。
+    * FuzzyQuery是一种模糊查询，它可以简单地识别两个相近的词语。（最小编辑距离算法）
     * @throws Exception
     */
    @Test

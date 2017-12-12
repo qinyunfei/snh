@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.QueryResponse;
@@ -130,9 +131,9 @@ public class Test1 {
 		// 构建查询条件
 		SolrQuery query = new SolrQuery();
 		// q :查询字符串
-		query.set("q", "南京");
+		query.set("q", "tit:南京"); //query.setQuery("tit:南京");
 		// fl 查询哪些字段域出来（就是显示结果），不写的话，就查询全部
-		query.set("fl", "id,name,coen");
+		query.set("fl", "id,name,coen"); //query.setFields("")
 		// start row 分页信息，与mysql的limit的两个参数一致效果
 		query.setStart(0);
 		query.setRows(10);
@@ -140,7 +141,7 @@ public class Test1 {
 		// query.set("fq", "id:2");
 		// sort 排序，请注意，如果一个字段没有被索引，那么它是无法排序的
 		// desc降序 asc 生序
-		query.set("sort", "id desc");
+		query.set("sort", "id desc"); //query.setSort("id",ORDER.desc);
 		// df 默认搜索的域
 		query.set("df", "coen");
 		// ======高亮设置===
@@ -149,12 +150,10 @@ public class Test1 {
 		// 高亮域 这里必须和 fl指定的域相同
 		query.addHighlightField("id,name,coen");
 		// 前缀简写
-		query.setHighlightSimplePre("<span style='color:red'>");
-		// query.set("hl.simple.pre", "<span style='color:red'>");
-
+		query.setHighlightSimplePre("<span style='color:red'>"); // query.set("hl.simple.pre", "<span style='color:red'>");
 		// 后缀简写
-		query.setHighlightSimplePost("</span>");
-		// query.set("hl.simple.post", "</span>");
+		query.setHighlightSimplePost("</span>"); // query.set("hl.simple.post", "</span>");
+		
 
 		// 执行查询获取查询响应
 		QueryResponse response = httpSolrClient.query(query);
@@ -190,20 +189,20 @@ public class Test1 {
 	@Test
 	public void name5() throws SolrServerException, IOException {
 		//1.删除一个
-		httpSolrClient.deleteById("1");
-		
-		
-		 //2.删除多个
-        List<String> ids = new ArrayList<>();
-        ids.add("1");
-        ids.add("2");
-        httpSolrClient.deleteById(ids);
-        
-        
-        
-        //3.根据查询条件删除数据,这里的条件只能有一个，不能以逗号相隔
-        httpSolrClient.deleteByQuery("id:zxj1");
-        
+//		httpSolrClient.deleteById("1");
+//		
+//		
+//		 //2.删除多个
+//        List<String> ids = new ArrayList<>();
+//        ids.add("1");
+//        ids.add("2");
+//        httpSolrClient.deleteById(ids);
+//        
+//        
+//        
+//        //3.根据查询条件删除数据,这里的条件只能有一个，不能以逗号相隔
+//        httpSolrClient.deleteByQuery("id:zxj1");
+//        
         //4.删除全部，删除不可恢复
         httpSolrClient.deleteByQuery("*:*");
 		httpSolrClient.commit();

@@ -126,13 +126,25 @@ public class Test1 {
 
 	/*
 	 * 处理响应的最简单和最方便的方法是使用ResponseHandler包含该handleResponse(HttpResponse
-	 * response)方法的接口。 这种方法完全免除了用户不必担心连接管理的问题。当使用a时 ResponseHandler，
+	 * response)方法的接口。 这种方法完全免除了用户不必担心连接管理的问题。当使用ResponseHandler时，
 	 * 无论请求执行是否成功或者引起异常，HttpClient都会自动处理确保连接释放回连接管理器。
-	 * 最佳使用
+	 * 最佳使用 方式完整版
 	 */
 	@Test
 	public void name11() throws ClientProtocolException, IOException, URISyntaxException {
-		CloseableHttpClient httpclient = HttpClients.createDefault();
+		//设置链接管理器
+		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+		// 将最大连接总数增加到200
+		cm.setMaxTotal(200);
+		// 将每个路由的默认最大连接数增加到20
+		cm.setDefaultMaxPerRoute(20);
+		// 增加本地主机的最大连接:80到50
+		HttpHost localhost = new HttpHost("locahost", 80);
+		cm.setMaxPerRoute(new HttpRoute(localhost), 50);
+
+		CloseableHttpClient httpclient = HttpClients.custom()
+		        .setConnectionManager(cm)
+		        .build();
 		// 设置http请求对象 所有HTTP请求都有一个请求行，它包含一个方法名，一个请求URI和一个HTTP协议版本。
 		URI uri = new URIBuilder().setScheme("http").setHost("jisutqybmf.market.alicloudapi.com").setPort(80)
 				.setPath("/weather/query").setParameter("city", "深圳").build();
@@ -145,8 +157,8 @@ public class Test1 {
 		.setStaleConnectionCheckEnabled(true)
 		.build();
 		httpget.setConfig(requestConfig);
-		
 		httpget.addHeader("Authorization", "APPCODE 50c0e17fb2284312a8a4d44aa33d75fd");
+		//响应处理器
 		ResponseHandler<Map<String, Object>> rh = new ResponseHandler<Map<String, Object>>() {
 
 			@SuppressWarnings("deprecation")
