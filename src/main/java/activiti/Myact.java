@@ -25,7 +25,7 @@ public class Myact {
 	
 	@Before
 	public void befo() {
-		//创建流程引擎
+		//创建流程引擎s
 		engine = ProcessEngines.getDefaultProcessEngine();
 	}
 	
