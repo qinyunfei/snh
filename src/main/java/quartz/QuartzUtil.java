@@ -28,8 +28,8 @@ import org.quartz.impl.matchers.GroupMatcher;
  */
 public class QuartzUtil {
 	public static SchedulerFactory gSchedulerFactory = new StdSchedulerFactory(); // 创建一个SchedulerFactory工厂实例
-	public static String JOB_GROUP_NAME = "作业组一"; // 作业组
-	public static String TRIGGER_GROUP_NAME = "触发器组一"; // 触发器组
+	public static String JOB_GROUP_NAME = "作业组一"; // 默认作业组
+	public static String TRIGGER_GROUP_NAME = "触发器组一"; // 默认触发器组
 
 	/*
 	 * 必须搞清楚 jobKey和triggerKey分别为作业和触发器的身份证
@@ -692,7 +692,7 @@ public class QuartzUtil {
 		public static void resumeTrigger(TriggerKey triggerKey) {
 			try {
 				Scheduler sched = gSchedulerFactory.getScheduler();
-				sched.unscheduleJob(triggerKey);// 移除触发器
+				sched.resumeTrigger(triggerKey);// 恢复触发器 
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}

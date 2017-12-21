@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit-1.7.xsd">
+
+	<!--创建链接工厂 这个是官网的例子 -->
+	<rabbit:connection-factory id="connectionFactory"
+		host="10.211.55.19" port="5672" username="xiaohei" password="123456"
+		virtual-host="/atguigu" channel-cache-size="50" />
+
+	<!-- 设置RabbitTemplate对象用来发送消息 这里的交换机和路由key写死了 意思是 向交换机myExchange中发送消息 路由key为foo.bar -->
+	<rabbit:template id="amqpTemplate" connection-factory="connectionFactory"
+		exchange="myExchange" routing-key="foo.bar"  />
+
+
+
+
+	<!-- RabbitAdmin 用来向服务器申请队列 交换机 以及设置绑定 类似Channel 链接服务器的通道 -->
+	<rabbit:admin connection-factory="connectionFactory" />
+
+	<!-- 向服务器申请一个队列 -->
+	<rabbit:queue name="myQueue" />
+
+	<!-- 向服务器申请topic交换机 -->
+	<rabbit:topic-exchange name="myExchange">
+		<!-- 绑定队列到交换机 并指定路由key -->
+		<rabbit:bindings>
+			<rabbit:binding queue="myQueue" pattern="foo.*" />
+		</rabbit:bindings>
+	</rabbit:topic-exchange>
+
+	<!-- 监听消息 消费者-->
+	<rabbit:listener-container
+		connection-factory="connectionFactory">
+		<rabbit:listener ref="foo" method="listen"
+			queue-names="myQueue" />
+	</rabbit:listener-container>
+
+	<bean id="foo" class="sprinamqp.test1.Foo"></bean>
+</beans>

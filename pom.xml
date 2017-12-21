@@ -5,7 +5,178 @@
 	<artifactId>snh</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+
+
+
+	<properties>
+		<!-- 公共依赖开始 -->
+		<commons-io.version>2.5</commons-io.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<commons-codec.version>1.10</commons-codec.version>
+		<commons-beanutils.version>1.9.3</commons-beanutils.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
+		<commons-math3.version>3.6.1</commons-math3.version>
+		<commons.fileupload>1.3.2</commons.fileupload>
+		<commons-email.version>1.4</commons-email.version>
+		<!-- 公共依赖结束 -->
+
+
+		<!-- 功能性组件开始 -->
+		<!-- junit -->
+		<junit.version>4.12</junit.version>
+		<!-- 时间日期操作 -->
+		<joda-time.version>2.9.9</joda-time.version>
+		<!-- httpclient -->
+		<httpclient.version>4.5.3</httpclient.version>
+		<!-- poi exl导入导出 -->
+		<poi.version>3.16</poi.version>
+		<!--quart任务调度 -->
+		<quartz.version>2.2.3</quartz.version>
+		<!-- fastjson好用的json工具 -->
+		<fastjson.version>1.2.39</fastjson.version>
+		<!--ehcache缓存 -->
+		<ehcache.version>2.10.4</ehcache.version>
+		<!-- jedis -->
+		<jedis.version>2.9.0</jedis.version>
+		<!-- 数据库 -->
+		<druid.version>1.1.0</druid.version>
+		<!-- mysql数据库驱动 -->
+		<mysql.connector>5.1.42</mysql.connector>
+
+		<!-- 功能性组件结束 -->
+
+		<!-- 框架配置开始 -->
+		<!-- spring -->
+		<spring.version>4.3.8.RELEASE</spring.version>
+		<!-- jackson -->
+		<jackson.version>2.7.4</jackson.version>
+
+		<!--mybatis的高版本需要jdk 1.8 -->
+		<mybatis.version>3.3.1</mybatis.version>
+		<mybatis.spring.version>1.3.1</mybatis.spring.version>
+		<!-- mybatsi逆向工程 -->
+		<mbg.version>1.3.5</mbg.version>
+		<!-- 通用mapper 简化mybatis单表操作 -->
+		<tk.version>3.4.4</tk.version>
+		<!-- mybatsi分页插件 -->
+		<pagehelper.version>5.0.3</pagehelper.version>
+
+
+		<!-- shiro安全框架 -->
+		<shiro.version>1.4.0</shiro.version>
+
+		<!-- hibernate-validator 验证框架 -->
+		<validator.version>6.0.5.Final</validator.version>
+
+		<!-- activiti工作流 -->
+		<activiti.version>5.22.0</activiti.version>
+		<activiti.spring.version>5.22.0</activiti.spring.version>
+
+		<!-- 框架配置结束 -->
+
+
+
+		<!-- 日志 -->
+		<log4j.version>1.2.17</log4j.version>
+		<slf4j.version>1.7.6</slf4j.version>
+
+		<!-- servlet-api，jsp-api，el,jstl -->
+		<javax.servlet-api.version>3.0.1</javax.servlet-api.version>
+		<jsp-api.version>2.2</jsp-api.version>
+		<javax.el-api.version>2.2.4</javax.el-api.version>
+		<jstl.version>1.2</jstl.version>
+
+
+	</properties>
+
+
+
+
 	<dependencies>
+		<!-- jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<!-- Spring配置 开始 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc-portlet</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring配置 结束 -->
+
+		<!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>4.0.3</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-rabbit</artifactId>
+			<version>1.7.5.RELEASE</version>
+		</dependency>
+
 		<!--activiti工作流 -->
 		<dependency>
 			<groupId>org.activiti</groupId>
@@ -147,21 +318,6 @@
 			<groupId>org.apache.solr</groupId>
 			<artifactId>solr-solrj</artifactId>
 			<version>7.1.0</version>
-		</dependency>
-
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>4.3.10.RELEASE</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-			<version>4.3.10.RELEASE</version>
 		</dependency>
 
 		<!-- httpclient -->
