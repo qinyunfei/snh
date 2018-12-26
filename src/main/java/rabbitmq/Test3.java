@@ -107,6 +107,7 @@ public class Test3 {
 		
 		//自动回复队列应答
         channel.basicConsume(queueName, true, consumer);
+        ///
         System.in.read();
 	}
 	

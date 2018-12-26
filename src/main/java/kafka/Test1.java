@@ -12,7 +12,7 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ProducerDemo {
+public class Test1 {
 
 	// 消息生产者
 	public Producer<String, String> producer;
@@ -22,7 +22,15 @@ public class ProducerDemo {
 
 		Properties props = new Properties();
 		// bootstrap.servers是Kafka集群的IP地址，如果Broker数量超过1个，则使用逗号分隔
-		props.put("bootstrap.servers", "service1:9092,service2:9092,service3:9092");
+		props.put("bootstrap.servers", "centos7-1:9092,centos7-2:9092,centos7-3:9092");
+
+		props.put("acks", "all");
+		props.put("retries", 0);
+		props.put("batch.size", 16384);
+		props.put("linger.ms", 1);
+		props.put("buffer.memory", 33554432);
+		
+		
 		// 序列化类型
 		props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
 		props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -37,7 +45,7 @@ public class ProducerDemo {
 		for (int i = 0; i < 10; i++) {
 			String msg = "Message " + i;
 			// 发布消息到主题
-			producer.send(new ProducerRecord<String, String>("my-replicated-topic","key"+i,msg));
+			producer.send(new ProducerRecord<String, String>("my-replicated-topic", "key" + i, msg));
 			System.out.println("发送:" + msg);
 		}
 		producer.close();
@@ -48,15 +56,15 @@ public class ProducerDemo {
 	public void name2() {
 		Properties properties = new Properties();
 		// bootstrap.servers是Kafka集群的IP地址，如果Broker数量超过1个，则使用逗号分隔
-		properties.put("bootstrap.servers", "service1:9092,service2:9092,service3:9092");
-		//消费者分组
+		properties.put("bootstrap.servers", "centos7-1:9092,centos7-2:9092,centos7-3:9092");
+		// 消费者分组
 		properties.put("group.id", "group-1");
 		properties.put("enable.auto.commit", "true");
 		properties.put("auto.commit.interval.ms", "1000");
 		properties.put("auto.offset.reset", "earliest");
 		properties.put("session.timeout.ms", "30000");
-		
-		//和消息生产者保持一致
+
+		// 和消息生产者保持一致
 		properties.put("key.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 		properties.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
 
@@ -64,11 +72,11 @@ public class ProducerDemo {
 		// 设置订阅的主题
 		kafkaConsumer.subscribe(Arrays.asList("my-replicated-topic"));
 		while (true) {
-			//设置超时时间
-			//Consumer调用poll方法来轮循Kafka集群的消息，其中的参数100是超时时间（Consumer等待直到Kafka集群中没有消息为止）： 
+			// 设置超时时间
+			// Consumer调用poll方法来轮循Kafka集群的消息，其中的参数100是超时时间（Consumer等待直到Kafka集群中没有消息为止）：
 			ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
 			for (ConsumerRecord<String, String> record : records) {
-				System.out.println("偏移量 = "+record.offset()+"  key ="+record.key()+" value = "+record.value());
+				System.out.println("偏移量 = " + record.offset() + "  key =" + record.key() + " value = " + record.value());
 			}
 		}
 
